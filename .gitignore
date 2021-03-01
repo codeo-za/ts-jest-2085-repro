@@ -1,0 +1,48 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+
+# Coverage
+coverage
+
+# Transpiled files
+src/server/build/
+
+# VS Code
+.vscode
+!.vscode/tasks.js
+
+# JetBrains IDEs
+.idea/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Misc
+.DS_Store
+*.sw*
+*.env
+
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+__test__/unit/coverage
+__test__/e2e/reports
+selenium-debug.log
+package-lock.json
+# ignore this so that install-changed works reliably
+#  on all consumers of this repo
+packagehash.txt
+buildreports
+junit.xml
+package-lock.json
+*.nupkg
+.jest-cache

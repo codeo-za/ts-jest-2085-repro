@@ -1,0 +1,9 @@
+{
+    "title": "Le Default",
+    "metaDescription": "",
+    "pwaPromptEnabled": false,
+    "pwa": {
+        "themeColor": "#886699",
+        "backgroundColor": "#eeeeee"
+    }
+}

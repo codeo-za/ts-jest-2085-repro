@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+
+    <script type="text/javascript">
+        function checkUnsupported() {
+            var ua = window.navigator.userAgent;
+            var unsupported = ["MSIE ", "Trident/", "Edge/"];
+            for (var i = 0; i < unsupported.length; i++) {
+                if (ua.indexOf(unsupported[i]) > -1) {
+                    document.getElementById("app").style.display = "none";
+                    document.getElementById("unsupported").style.display = "block";
+                    if ("#{GoogleAppLink}" === "") {
+                        document.getElementById("applinksprompt").style.display = "none";
+                        document.getElementById("applinks").style.display = "none";
+                    }
+                    trackUnsupported(ua, unsupported[i]);
+                    break;
+                } else {
+                    document.getElementById("unsupported").style.display = "none";
+                    document.getElementById("app").style.display = "block";
+                }
+            }
+        }
+        function trackUnsupported(ua, matched) {
+            !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+                analytics.load("#{AnalyticsKey}");
+                analytics.track("Unsupported browser blocked", {
+                    ua: ua,
+                    matched: matched
+                });
+            }}();
+        }
+        function shouldSkipAppBanners() {
+            var query = (window.location.search || "")
+                .replace(/\?/, "")
+                .split("&")
+                .reduce(function (acc, cur) {
+                    var parts = cur.split("=");
+                    acc[parts[0]] = parts.slice(1).join("=");
+                    return acc;
+                }, {});
+            return !!query["platform"];
+        }
+
+        if (!shouldSkipAppBanners()) {
+            document.write(
+                '<meta name="apple-itunes-app" content="app-id=#{iOSAppId}">'
+            );
+            document.write(
+                '<meta name="google-play-app" content="app-id=#{AndroidAppId}">'
+            );
+        }
+
+        window.addEventListener("DOMContentLoaded", function() {
+            checkUnsupported();
+        });
+    </script>
+    <link rel="icon" href="favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="description" content="<%= htmlWebpackPlugin.options.metaDescription %>">
+</head>
+<body>
+<noscript>
+    <strong>
+        We're sorry but our app doesn't work properly without JavaScript enabled.
+        Please enable it to continue.
+    </strong>
+</noscript>
+
+<div id="unsupported" class="p-unsupported" style="display: none;">
+    <div class="modal">
+        <div class="modal-content modal-full">
+            <div>
+                <div class="modal-inside">
+                    <div class="content">
+                        <div>
+                            <h1>Our website no longer supports Internet Explorer or older versions of Microsoft Edge</h1>
+                            <p>
+                                Please use a modern browser such as
+                                <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a>,
+                                <a href="https://www.google.com/chrome" target="_blank" rel="noopener noreferrer">Google Chrome</a> or the latest version of
+                                <a href="https://www.microsoft.com/en-us/edge" target="_blank" rel="noopener noreferrer">Microsoft Edge</a>.
+                            </p>
+                            <p id="applinksprompt">
+                                Or download our mobile app:
+                            </p>
+                        </div>
+                        <div id="applinks" class="ie__links">
+                            <a href="#{GoogleAppLink}" target="_blank" rel="noopener noreferrer"><img src="/img/android-store.png" alt="Download the app from the Android Play store"></a>
+                            <a href="#{iOSAppLink}" target="_blank" rel="noopener noreferrer"><img src="/img/apple-store.png" alt="Download the app from the iOS App store"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
+</html>
