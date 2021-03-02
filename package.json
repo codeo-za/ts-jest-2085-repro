@@ -89,7 +89,6 @@
     },
     "devDependencies": {
         "@babel/polyfill": "^7.2.5",
-        "@fortawesome/fontawesome-pro": "^5.5.0",
         "@types/datejs": "0.0.31",
         "@types/faker": "^4.1.4",
         "@types/glob": "^7.1.1",
