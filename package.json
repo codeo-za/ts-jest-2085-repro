@@ -74,7 +74,7 @@
         "swiper": "^4.4.2",
         "urijs": "^1.19.1",
         "vee-validate": "2.0.9",
-        "vue": "2.5.17",
+        "vue": "3.0.0",
         "vue-backtotop": "^1.4.12",
         "vue-class-component": "^6.2.0",
         "vue-currency-filter": "3.2.0",
